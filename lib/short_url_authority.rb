@@ -17,7 +17,7 @@ module Authority
     end
 
     def convert(numeric_id)
-      numeric_id.to_s(32)
+      numeric_id.to_s(36)
     end
 
     def synchronized(&sync)
