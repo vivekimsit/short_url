@@ -13,10 +13,10 @@ describe ResolveShortUrl do
         :short_url_repo  => MemoryRepository::ShortUrl.new
       }
       repo = @dependencies.fetch(:short_url_repo)
-      short_url = ShortUrl.new('http://www.example.com')
+      short_url = Entity::ShortUrl.new('http://www.example.com')
       short_url.url_key = '100'
       repo.persist(short_url)
-      short_url = ShortUrl.new('http://www.example.com/foo')
+      short_url = Entity::ShortUrl.new('http://www.example.com/foo')
       short_url.url_key = '100123'
       repo.persist(short_url)
     end

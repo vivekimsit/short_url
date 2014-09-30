@@ -18,6 +18,7 @@ class ResolveShortUrl < Interactor
   end
 
   def url
+    puts 'In get url'
     short_url = get_url
     if not short_url
       return false

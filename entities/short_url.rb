@@ -1,39 +1,41 @@
 require_relative '../serializer/raw'
 require 'uri'
 
-class ShortUrl
+module Entity
+  class ShortUrl
 
-  attr_accessor :id, :url, :url_key
+    attr_accessor :id, :url, :url_key
 
-  def initialize(url)
-    @url = url
-    @url_key = nil
-  end
-
-  def valid?
-    if empty?
-      return false
+    def initialize(url)
+      @url = url
+      @url_key = nil
     end
-    format?
-  end
 
-  def value
-    Serializer::Raw.new(self).serialize
-  end
+    def valid?
+      if empty?
+        return false
+      end
+      format?
+    end
 
-  def attributes
-    [:url, :id, :url_key]
-  end
+    def value
+      Serializer::Raw.new(self).serialize
+    end
 
-  private
+    def attributes
+      [:url, :id, :url_key]
+    end
 
-  def empty?
-    String(url).length == 0
-  end
+    private
 
-  def format?
-    !!URI.parse(url)
-  rescue URI::InvalidURIError
-    false
+    def empty?
+      String(url).length == 0
+    end
+
+    def format?
+      !!URI.parse(url)
+    rescue URI::InvalidURIError
+      false
+    end
   end
 end

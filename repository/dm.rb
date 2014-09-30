@@ -34,7 +34,7 @@ module DataMapperRepository
     def all
       res = []
       model_class.all.each do |value|
-        short_url = ShortUrl.new(value.url)
+        short_url = Entity::ShortUrl.new(value.url)
         short_url.url_key = value.url_key
         short_url.id = value.id
         res << short_url
@@ -42,7 +42,7 @@ module DataMapperRepository
       res
     end
 
-    def get_by_id(id)
+    def find_by_id(id)
       model_class.first(:id => id.to_i)
     end
   end

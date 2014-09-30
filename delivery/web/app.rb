@@ -1,4 +1,5 @@
 require_relative '../../interactors/shorten_url'
+require_relative '../../interactors/resolve_short_url'
 require_relative '../../repository/repository'
 require_relative '../../repository/memory'
 require_relative '../../repository/dm'
@@ -31,5 +32,13 @@ post '/api/shorten' do
   JSON.dump({
     :message => :Success,
     :key => ShortenUrl.new(url, dependencies).key
+  })
+end
+
+get '/api/resolve/:key' do
+  dependencies = settings.dependencies
+  JSON.dump({
+    :message => :Success,
+    :url => ResolveShortUrl.new(params[:key], dependencies).url
   })
 end

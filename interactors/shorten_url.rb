@@ -28,7 +28,7 @@ class ShortenUrl < Interactor
 
   def save_url
     @@logger.info('Saving url: ' + String(url))
-    short_url = ShortUrl.new(url)
+    short_url = Entity::ShortUrl.new(url)
     short_url.url_key = @short_url_authority.next_id
     if short_url.valid?
       @repo.persist(short_url).value
