@@ -1,17 +1,15 @@
-require_relative '../entities/short_url'
+require_relative '../marshal/short_url_marshal'
 
 module MemoryRepository
   class ShortUrl
 
     def initialize()
       @short_urls = {}
-      @id = 0
     end
 
-    def persist(short_url)
-      @id += 1
-      short_urls[@id] = short_url
-      short_url.id = @id
+    def save(short_url)
+      uid = short_url[:uid]
+      short_urls[uid] = short_url
       short_url
     end
 
@@ -23,8 +21,8 @@ module MemoryRepository
       res
     end
 
-    def find_by_id(id)
-      @short_urls[id.to_i]
+    def find(key)
+      @short_urls[key]
     end
 
     private

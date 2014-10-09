@@ -4,11 +4,11 @@ require 'uri'
 module Entity
   class ShortUrl
 
-    attr_accessor :id, :url, :url_key
+    attr_accessor :key, :url
 
-    def initialize(url)
+    def initialize(url, key=nil)
       @url = url
-      @url_key = nil
+      @key = key
     end
 
     def valid?
@@ -23,7 +23,7 @@ module Entity
     end
 
     def attributes
-      [:url, :id, :url_key]
+      [:key, :url]
     end
 
     private

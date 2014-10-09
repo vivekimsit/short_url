@@ -14,27 +14,22 @@ class ResolveShortUrl < Interactor
 
   def initialize(key, dependencies)
     @key = key
-    @repo = dependencies.fetch(:short_url_repo)
+    @gateway = dependencies.fetch(:gateway)
   end
 
   def url
-    puts 'In get url'
-    short_url = get_url
-    if not short_url
-      return false
-    end
-    key = short_url.url_key
-    url = short_url.url
-    @@logger.info("Returning: #{key}: #{url}")
-    url
+    resolved_url = get_url
+    false if not resolved_url
+    @@logger.info("Returning url: #{resolved_url}")
+    resolved_url
   end
 
   private
 
   def get_url
     #binding.pry
-    @repo.all.each do |short_url|
-      return short_url if short_url.url_key == key
+    @gateway.all.each do |short_url|
+      return short_url.url if short_url.key == key
     end
     @@logger.info("Key:#{key} does not exists")
     false

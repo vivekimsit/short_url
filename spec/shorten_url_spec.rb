@@ -1,16 +1,16 @@
+require 'spec_helper'
 require_relative '../repository/repository'
 require_relative '../repository/memory'
 require_relative '../interactors/shorten_url'
 require_relative '../lib/short_url_authority'
 
 describe ShortenUrl do
+  include ShortUrlSpecHelper
+
   let(:url) { 'http://example.com' }
-  let(:dependencies) {
-    {
-      :short_url_repo  => MemoryRepository::ShortUrl.new,
-      :short_url_authority => Authority::InMemory.new
-    }
-  }
+  let(:gateway) { build_gateway }
+  let(:backend) { build_backend }
+  let(:dependencies) { build_dependency }
 
   describe 'with a given url' do
     it 'provides a key' do

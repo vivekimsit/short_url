@@ -21,10 +21,10 @@ module DataMapperRepository
       DataMapperRepository::ShortUrl
     end
 
-    def persist(entity)
+    def save(entity)
       attrs = {
         :url => entity.url,
-        :url_key => entity.url_key
+        :url_key => entity.key
       }
       model = model_class.create(attrs)
       entity.id = model.id
